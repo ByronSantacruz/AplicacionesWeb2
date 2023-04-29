@@ -1,5 +1,6 @@
-const {Computadora, Prestamista, Prestamo} = require ('/datos')
-
+const {Computadora, Prestamista, Prestamo} = require ('./datos')
+//CRUD en funciones
+//Metodo guarda cumputadora
 async function GuardarComputadora(Descripcion,DetallesTecnicos, CostoxHora) {
     try {
         const nuevoComputadora = new Computadora({
@@ -13,7 +14,7 @@ async function GuardarComputadora(Descripcion,DetallesTecnicos, CostoxHora) {
       console.error(error);
     }
 }
-//funcion para editar Computadora
+//Metodo para editar Computadora
 async function editarComputadora(Descripcion,DetallesTecnicos, CostoxHora) {
     try {
       await Computadora.findByIdAndUpdate( {
@@ -26,7 +27,7 @@ async function editarComputadora(Descripcion,DetallesTecnicos, CostoxHora) {
       console.error(error);
     }
 }
-//funcion para eliminar Computadora
+//Metodo para eliminar Computadora
 async function eliminarComputadora(id) {
     try {
       await Computadora.findByIdAndDelete(id);
@@ -35,6 +36,7 @@ async function eliminarComputadora(id) {
       console.error(error);
     }
 }
+//Metodo para guardar prestamista
 async function Guardarprestamista(Nombre,identificacion) {
     try {
         const nuevaPrestamista = new Prestamista({
@@ -47,7 +49,7 @@ async function Guardarprestamista(Nombre,identificacion) {
       console.error(error);
     }
 }
-//funcion para editar una prestamista 
+//Metodo para editar una prestamista 
 async function editarPrestamista(Nombre,identificacion) {
     try {
       await Prestamista.findByIdAndUpdate( {
@@ -59,7 +61,7 @@ async function editarPrestamista(Nombre,identificacion) {
       console.error(error);
     }
 }
-//funcion para eliminar un Tipo de Ejercicio
+//Metodo para eliminar prestamista
 async function eliminarprestamista(id) {
     try {
       await Prestamista.findByIdAndDelete(id);
@@ -68,6 +70,7 @@ async function eliminarprestamista(id) {
       console.error(error);
     }
 }
+//Metodo para guardar prestamo
 async function GuardarPrestamo(idComputadora, idPrestamista, Fecha, Hora, NumeroHoraPres) {
     try {
         const nuevoPrestamo = new Prestamo({
@@ -76,7 +79,6 @@ async function GuardarPrestamo(idComputadora, idPrestamista, Fecha, Hora, Numero
             Fecha :Fecha, 
             Hora : Hora,
             NumeroHoraPres : NumeroHoraPres
-           
         });
         const GuardaPrestamo = await nuevoPrestamo.save();
         console.log( "Prestamo guardado con éxito.");
@@ -84,7 +86,7 @@ async function GuardarPrestamo(idComputadora, idPrestamista, Fecha, Hora, Numero
       console.error(error);
     }
 }
-//funcion para editar un Prestamo
+//Metodo para editar un prestamo
 async function editarunprestamo(idComputadora, idPrestamista, Fecha, Hora, NumeroHoraPres) {
     try {
         const prestamo = await Prestamo.findByIdAndUpdate(idprestamo,{
@@ -99,7 +101,7 @@ async function editarunprestamo(idComputadora, idPrestamista, Fecha, Hora, Numer
         console.error(error);
     }
 }
-//funcion para eliminar un Prestamo
+//Metodo para eliminar un prestamo
 async function eliminarunPrestamo(idprestamo) {
     try {
         const prestamo = await Prestamo.findByIdAndDelete(idprestamo);
@@ -108,6 +110,7 @@ async function eliminarunPrestamo(idprestamo) {
         console.error(error);
     }
 }
+//Metodo para mostrar listado de prestamo usando la intruccion for
 async function listarPrestamoForOf() {
     try {
         const prestamo = await Prestamo.find().populate('idComputadora idPrestamista');
@@ -126,6 +129,7 @@ async function listarPrestamoForOf() {
         console.log('Error al listar prestamos', error);
       }
 }
+//Metodo para mostrar listado de computadoras usando la intruccion forEach
 async function listarComputadoraForEach() {
     try {
         const cursor = await Computadora.find();
@@ -141,6 +145,7 @@ async function listarComputadoraForEach() {
       console.log('Error al listar computadora', error);
     }
 }
+//Metodo para mostrar listado de prestamista usando la intruccion while
 async function listarPrestamistaWhile() {
     try {
         const palabras = await Prestamista.find();
@@ -157,6 +162,7 @@ async function listarPrestamistaWhile() {
         console.log('Error al listar prestamista ', error);
     }
 }
+//Realizamos el proceso de exporta nuestros metodo de CRUD
 module.exports = {
    GuardarComputadora,
    editarComputadora,

@@ -15,8 +15,10 @@ const Computadora = mongoose.model("Computadora",{
     DetallesTecnicos:String,
     CostoxHora:String,
 });
-const Prestamista = mongoose.model("Prestamista",{Nombre:String,identificacion:String,});
-
+const Prestamista = mongoose.model("Prestamista",{
+    Nombre:String,
+    identificacion:String,
+});
 const Prestamo = mongoose.model("Prestamo", 
          { 
                  idComputadora: {type: mongoose.Types.ObjectId , ref:"Computadora" } ,
