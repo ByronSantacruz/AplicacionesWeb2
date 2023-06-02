@@ -27,22 +27,21 @@ const getPrestamista = async (req, res= response)=>{
 const createPrestamista = async(req,res=response)=>{
     const { status, ...body } =  req.body;
     
-    const existPrestamista =  await Prestamista.findOne({identificacion: body.identificacion})
+    const existPrestamista =  await Prestamista.findOne({name: body.name})
 
     if (existPrestamista)
     {
         return res.status(400).json({
-            msg:`El prestamista ${ existePrestamista.identificacion } ya existe`
+            msg:`La prestamista${ existPrestamista.name } ya existe`
         })
     }
 
     const data = {
         ...body,
-        nombre: body.nombre,
-        identificacion: body.identificacion
+        name: body.name
     }
 
-    const prestamista = new Prestamista(data);
+    const prestamista= new Prestamista(data);
 
     const newPrestamista =  await prestamista.save();
     res.status(201).json(newPrestamista);
@@ -55,14 +54,14 @@ const updatePrestamista = async(req,res =  response)=>{
 }
 const deletePrestamista =  async (req, res= response)=>{
     const {id} = req.params;
-    const deletedPrestamista=  await Prestamista.findByIdAndUpdate(id, {status:false}, {new:true} );
+    const deletedPrestamista =  await Prestamista.findByIdAndUpdate(id, {status:false}, {new:true} );
     res.json(deletedPrestamista);
 }
 
  module.exports ={
     createPrestamista,
-    getPrestamista,
     getPrestamistas,
+    getPrestamista,
     updatePrestamista,
     deletePrestamista
  }

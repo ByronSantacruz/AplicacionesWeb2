@@ -13,11 +13,10 @@ class Server
 
         this.port = process.env.PORT;
 
-        //Creación de los paths
         this.paths = {
             computadoras: '/api/computadoras',
             prestamistas: '/api/prestamistas',
-            prestamos: '/api/prestamos',
+            prestamos: '/api/prestamos'
         }
 
         this.connectDB();
@@ -36,11 +35,14 @@ class Server
         this.app.use( '/uploads/', express.static('uploads'))
 
     }
-    //Implementación de rutas de entidades
     routes(){
-        this.app.use(this.paths.computadora, require('./routes/computadora')   )
-        this.app.use(this.paths.prestamista, require('./routes/prestamista')   )
-        this.app.use(this.paths.prestamo, require('./routes/prestamo')   )
+
+        this.app.use(this.paths.computadoras, require('./routes/computadoras')   )
+        this.app.use(this.paths.prestamistas, require('./routes/prestamistas')   )
+        this.app.use(this.paths.prestamos, require('./routes/prestamos')   )
+
+
+
     }
 
     listen(){
@@ -51,5 +53,6 @@ class Server
 
 
 }
+
 
 module.exports = Server;

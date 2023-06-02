@@ -27,23 +27,21 @@ const getComputadora = async (req, res= response)=>{
 const createComputadora = async(req,res=response)=>{
     const { status, ...body } =  req.body;
     
-    const existComputadora =  await Computadora.findOne({descripcion: body.descripcion})
+    const existComputadora =  await Computadora.findOne({name: body.name})
 
     if (existComputadora)
     {
         return res.status(400).json({
-            msg:`El nombre  ${ existeComputadora.nombre } ya existe`
+            msg:`La computadora${ existComputadora.name } ya existe`
         })
     }
 
     const data = {
         ...body,
-        descripcion: body.descripcion,
-        detallestecnicos: body.detallestecnicos,
-        costoxhora: body.costoxhora
+        name: body.name
     }
 
-    const computadora = new Computadora(data);
+    const computadora= new Computadora(data);
 
     const newComputadora =  await computadora.save();
     res.status(201).json(newComputadora);
@@ -51,19 +49,19 @@ const createComputadora = async(req,res=response)=>{
 const updateComputadora = async(req,res =  response)=>{
     const {id} = req.params;
     const { status, ...data } =  req.body;
-    const computadoraUpdated =  await Computadora.findByIdAndUpdate(id,data, {new: true} )
-    res.json(computadoraUpdated);
+    const computadoraUpdate =  await Computadora.findByIdAndUpdate(id,data, {new: true} )
+    res.json(computadoraUpdate);
 }
-const deleteComputadora=  async (req, res= response)=>{
+const deleteComputadora =  async (req, res= response)=>{
     const {id} = req.params;
-    const deletedComputadora=  await Computadora.findByIdAndUpdate(id, {status:false}, {new:true} );
+    const deletedComputadora =  await Computadora.findByIdAndUpdate(id, {status:false}, {new:true} );
     res.json(deletedComputadora);
 }
 
  module.exports ={
     createComputadora,
-    getComputadora,
     getComputadoras,
+    getComputadora,
     updateComputadora,
     deleteComputadora
  }

@@ -1,23 +1,22 @@
 const { model, Schema } = require('mongoose');
 
+
 const ComputadoraSchema = Schema(
     {
-        descripcion:{
-            type: String,
-            required: [ true, 'El nombre de la computadora es necesario'],
+    
+        id: {
+            type: Number,
+            required: true,
+            unique: true
         },
-        status:{
-            type: Boolean,
-            default: true,
-            required:true
-        },
-        detallestecnicos:{
+        descripcion: {
             type: String,
-            required: [ true, 'Detalles tecnico de la computadora es necesaria'],
+            required: true
         },
-        costoxhora:{
-            type: String,
-            required: [ true, 'El costo por hora de la computadora es necesario'],
+        costoxhora: {
+            type: Number,
+            default: 0,
+            required: true
         }
     }
 );
