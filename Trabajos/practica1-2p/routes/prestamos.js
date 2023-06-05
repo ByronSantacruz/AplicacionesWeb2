@@ -11,6 +11,9 @@ const {
 
 const router = Router();
 
+//Para ver prestamo
+//http://localhost:2000/v1/inventory/api/Prestamos
+
 // Rutas de las notas
 router.post('/', [
   check('id', 'El campo "id" es obligatorio').notEmpty().isNumeric(),

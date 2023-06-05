@@ -12,6 +12,9 @@ const { validateFields } = require('../middlewares')
 
 const router= Router();
 
+//Para ver prestamo
+//http://localhost:2000/v1/inventory/api/Computadoras
+
 router.get('/', getComputadoras );
 router.get('/:id'
 ,check('id', 'Este no es un ID de Mongo correcto').isMongoId()
@@ -21,6 +24,7 @@ router.get('/:id'
     check('name', 'EL nombre es requerido').not().isEmpty(),
     validateFields
 ], createComputadora);
+
 
  router.put('/:id', updateComputadora);
 

@@ -9,7 +9,7 @@ const PrestamistaSchema = Schema(
             required: true,
             unique: true
         },
-        nombre: {
+        name: {
             type: String,
             required: true
         },

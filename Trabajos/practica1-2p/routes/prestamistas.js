@@ -12,6 +12,9 @@ const { validateFields } = require('../middlewares')
 
 const router= Router();
 
+//Para ver prestamo
+//http://localhost:2000/v1/inventory/api/Prestamistas
+
 router.get('/', getPrestamistas );
 router.get('/:id'
 ,check('id', 'Este no es un ID de Mongo correcto').isMongoId()

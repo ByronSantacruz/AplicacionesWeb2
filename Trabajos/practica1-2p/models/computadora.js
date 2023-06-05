@@ -9,7 +9,7 @@ const ComputadoraSchema = Schema(
             required: true,
             unique: true
         },
-        descripcion: {
+        name: {
             type: String,
             required: true
         },
