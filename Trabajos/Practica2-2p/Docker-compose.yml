@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  backend:
+    build: .
+    depends_on:
+      - database
+    ports:
+      - "2000:2000"
+    environment:
+      # - name=${PORT}
+      - PORT = 2000
+      - CNN_MONGO = mongodb://database/test
+  database:
+    image: mongo 
+    ports:
+      - "27017:27017"
+    volumes:
+      - './data:/data/db'
+
+
+ 
