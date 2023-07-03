@@ -1,0 +1,51 @@
+version: '3'
+
+
+services:
+  computadoras:
+    build: ./computadoras
+    depends_on:
+      - datacomputadoras
+    environment:
+      - PORT=2000
+      - MONGODB_CNN=mongodb://datacomputadoras:27017/test
+    # ports:
+    #   - "2000:2000"
+  prestamistas:
+    build: ./prestamistas
+    depends_on:
+      - dataprestamistas
+    environment:
+      - PORT=2000
+      - MONGODB_CNN=mongodb://dataprestamistas:27017/test
+  prestamos:
+    build: ./prestamos
+    depends_on:
+      - dataprestamos
+    environment:
+      - PORT=2000
+      - MONGODB_CNN=mongodb://dataprestamos:27017/test
+
+  datacomputadoras:
+    image: mongo
+    # ports:
+    #   - "27017:27017"
+  dataprestamistas:
+    image: mongo
+    # ports:
+    #   - "27017:27017"
+  dataprestamos:
+    image: mongo
+    # ports:
+    #   - "27017:27017"
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - computadoras
+      - prestamistas
+      - prestamos
