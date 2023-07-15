@@ -1,0 +1,70 @@
+<div>
+  <div class="join join-vertical centrocrear lg:join-horizontal">
+    <button routerLink="/computadoras" class="btn join-item btn-secondary">Computadoras</button>
+    <button routerLink="/prestamistas" class="btn join-item btn-secondary">Prestamistas</button>
+    <button routerLink="/prestamos" class="btn join-item btn-secondary">Prestamos</button>
+  </div>
+  <div class="text-center centro lg:text-left">
+    <h1 class="text-5xl font-bold"> Computadoras</h1>
+  </div>
+  <div class="centrocrear">
+    <label for="my_modal_6" class="btn bg-secondary">Crear</label>
+    <input type="checkbox" id="my_modal_6" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box">
+        <form action="" method="POST" (ngSubmit)="RegistrarComputadora()">
+          <h3 class="font-bold text-lg">Creación de Computadoras</h3>
+          <p class="py-4">Nombre:</p>
+          <input class="input input-secondary w-full" type="text" name="nombre" [(ngModel)]="computadoraCR.name">
+          <p class="py-4">Costo por hora:</p>
+          <input class="input input-secondary w-full" type="number" name="costoxhora" [(ngModel)]="computadoraCR.costoxhora">
+          <div class="modal-action text-base-100">
+            <label for="my_modal_6" class="btn">Cerrar</label>
+            <button type="submit" class="btn bg-secondary">Crear</button>
+          </div>
+        </form>
+      </div>
+      <label class="modal-backdrop" for="my_modal_6">Close</label>
+    </div>
+  </div>
+  <div class="card-body overflow-x-auto">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Costo por Hora</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let computadora of computadoras" class="hover">
+          <td>{{ computadora._id }}</td>
+          <td>{{ computadora.name }}</td>
+          <td>{{ computadora.costoxhora }}</td>
+          <td>
+            <label for="my_modal_{{computadora._id}}" class="btn bg-secondary">Editar</label>
+            <input type="checkbox" id="my_modal_{{computadora._id}}" class="modal-toggle" />
+            <div class="modal">
+              <div class="modal-box">
+                <form action="" method="POST" (submit)="ModificarComputadora(computadora)">
+                  <h3 class="font-bold text-lg">Edición de Computadoras</h3>
+                  <p class="py-4">Nombre:</p>
+                  <input class="input input-secondary w-full" type="text" name="nombre" [(ngModel)]="computadora.name">
+                  <p class="py-4">Costo por Hora:</p>
+                  <input class="input input-secondary w-full" type="number" name="costo" [(ngModel)]="computadora.costoxhora">
+                  <div class="modal-action text-base-100">
+                    <label for="my_modal_{{computadora._id}}" class="btn">Cerrar</label>
+                    <button type="submit" class="btn bg-secondary">Editar</button>
+                  </div>
+                </form>
+              </div>
+              <label class="modal-backdrop" for="my_modal_{{computadora._id}}">Close</label>
+            </div>
+            <button class="btn btn-error" (click)="EliminarComputadora(computadora._id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
